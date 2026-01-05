@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Portfolio | あなたの名前</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="あなたの名前のポートフォリオサイトです。" />
+    <style>
+        :root {
+            --bg: #0f172a;
+            --bg-alt: #111827;
+            --accent: #3b82f6;
+            --accent-soft: rgba(59, 130, 246, 0.1);
+            --text: #e5e7eb;
+            --muted: #9ca3af;
+            --border: #1f2937;
+            --card: #020617;
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, #1f2937 0, #020617 45%, #000 100%);
+            color: var(--text);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.8));
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            transition: background 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        header.scrolled {
+            background: rgba(15, 23, 42, 0.98);
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.9);
+        }
+
+        .nav-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: radial-gradient(circle at 30% 30%, #f9fafb, #3b82f6);
+            box-shadow: 0 0 16px rgba(59, 130, 246, 0.8);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 16px;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            padding: 4px 0;
+            border-bottom: 1px solid transparent;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text);
+            border-color: var(--accent-soft);
+            text-decoration: none;
+        }
+
+        main {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 32px 20px 64px;
+        }
+
+        section {
+            margin-bottom: 56px;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1,
+        h2,
+        h3 {
+            margin: 0 0 12px;
+            letter-spacing: 0.03em;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 4vw, 2.6rem);
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            border-left: 3px solid var(--accent);
+            padding-left: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tagline {
+            color: var(--muted);
+            font-size: 0.95rem;
+            max-width: 40rem;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+            gap: 32px;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        .pill {
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid var(--border);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .btn-primary,
+        .btn-ghost,
+        .btn-outline {
+            padding: 8px 16px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: none;
+            color: inherit;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease, border-color 0.15s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #0ea5e9);
+            color: white;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.35);
+        }
+
+        .btn-primary:hover {
+            filter: brightness(1.06);
+            transform: translateY(-1px);
+            box-shadow: 0 14px 34px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-ghost {
+            border-color: var(--border);
+            background: rgba(15, 23, 42, 0.8);
+            color: var(--muted);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--accent-soft);
+            color: var(--text);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            border-color: var(--accent-soft);
+            color: var(--text);
+            background: rgba(15, 23, 42, 0.7);
+            font-size: 0.8rem;
+            padding: 6px 12px;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .hero-right {
+            justify-self: center;
+        }
+
+        .profile-card {
+            width: 220px;
+            height: 220px;
+            border-radius: 28px;
+            background: radial-gradient(circle at 20% 0%, rgba(96, 165, 250, 0.4), transparent 60%),
+                radial-gradient(circle at 100% 100%, rgba(16, 185, 129, 0.25), transparent 60%),
+                #020617;
+            border: 1px solid rgba(30, 64, 175, 0.8);
+            box-shadow:
+                0 24px 70px rgba(15, 23, 42, 0.9),
+                0 0 0 1px rgba(15, 23, 42, 0.9);
+            position: relative;
+            overflow: hidden;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .profile-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 22px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            background: linear-gradient(135deg, #1f2937, #020617);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+        }
+
+        .profile-name {
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .profile-role {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .profile-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 8px;
+        }
+
+        .profile-tags span {
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            color: var(--muted);
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        .profile-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--muted);
+        }
+
+        .online-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: #22c55e;
+            box-shadow: 0 0 14px rgba(34, 197, 94, 0.9);
+            margin-right: 4px;
+        }
+
+        .floating-badge {
+            position: absolute;
+            right: 16px;
+            top: 16px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(59, 130, 246, 0.6);
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .section-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+            gap: 32px;
+        }
+
+        .card {
+            background: linear-gradient(to bottom right, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.98));
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            padding: 18px 18px 16px;
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.7);
+        }
+
+        .card h3 {
+            font-size: 1rem;
+            margin-bottom: 6px;
+        }
+
+        .card-sub {
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .card+.card {
+            margin-top: 12px;
+        }
+
+        .timeline {
+            border-left: 1px solid var(--border);
+            padding-left: 14px;
+            margin-left: 4px;
+        }
+
+        .timeline-item {
+            margin-bottom: 14px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -15px;
+            top: 4px;
+            width: 9px;
+            height: 9px;
+            border-radius: 999px;
+            background: var(--accent);
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.8);
+        }
+
+        .timeline-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .timeline-meta {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .skills-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .skill-tag {
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(55, 65, 81, 0.9);
+            background: rgba(17, 24, 39, 0.9);
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+        }
+
+        .project-card {
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.98));
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            padding: 14px 14px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.9);
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+
+        .project-label {
+            font-size: 0.7rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .project-title {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .project-desc {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        .project-meta {
+            font-size: 0.75rem;
+            color: var(--muted);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .project-footer {
+            margin-top: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+        }
+
+        .project-links a {
+            font-size: 0.8rem;
+            color: var(--accent);
+            margin-right: 10px;
+        }
+
+        .project-actions {
+            margin-top: 4px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .contact-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        .contact-list li+li {
+            margin-top: 6px;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 16px 20px 26px;
+            font-size: 0.8rem;
+            color: var(--muted);
+            text-align: center;
+            background: #020617;
+        }
+
+        /* ===== モーダル ===== */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+        }
+
+        .modal-backdrop.is-open {
+            display: flex;
+        }
+
+        .modal {
+            width: min(600px, 90%);
+            max-height: 80vh;
+            background: linear-gradient(to bottom right, #020617, #020617);
+            border-radius: 16px;
+            border: 1px solid rgba(55, 65, 81, 0.9);
+            box-shadow: 0 30px 80px rgba(15, 23, 42, 0.95);
+            padding: 18px 20px 16px;
+            display: flex;
+            flex-direction: column;
+            color: var(--text);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .modal-title {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            border: none;
+            background: transparent;
+            color: var(--muted);
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 4px 6px;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: #f9fafb;
+        }
+
+        .modal-body {
+            font-size: 0.9rem;
+            color: var(--muted);
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .modal-body h4 {
+            font-size: 0.95rem;
+            margin: 10px 0 4px;
+            color: var(--text);
+        }
+
+        .modal-meta {
+            font-size: 0.8rem;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .modal-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 6px 0 12px;
+            font-size: 0.8rem;
+        }
+
+        .modal-tag {
+            padding: 2px 8px;
+            border-radius: 999px;
+            border: 1px solid rgba(75, 85, 99, 0.9);
+            background: rgba(15, 23, 42, 0.9);
+        }
+
+        .modal-footer {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(31, 41, 55, 0.9);
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            font-size: 0.85rem;
+        }
+
+        .modal-footer a {
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .hero-right {
+                order: -1;
+            }
+
+            .section-grid {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            header {
+                position: static;
+            }
+
+            .nav-inner {
+                padding-inline: 16px;
+            }
+        }
+    </style>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- ナビゲーション -->
+    <header>
+        <div class="nav-inner">
+            <div class="nav-left">
+                <div class="nav-dot"></div>
+                <span>your-name.dev</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- ヒーロー -->
+        <section id="top" aria-label="概要">
+            <div class="hero">
+                <div class="hero-left">
+                    <div class="hero-meta">
+                        <span class="pill">ポートフォリオ</span>
+                        <span>Based in Japan</span>
+                    </div>
+                    <h1>あなたの名前</h1>
+                    <p class="tagline">
+                        Webエンジニア / フロントエンド / デザイナー など、簡単な自己紹介文を入れてください。
+                        どのような開発・デザインが得意か、1〜2行でまとめて書くと読みやすいです。
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#projects" class="btn-primary js-scroll">制作実績を見る</a>
+                        <a href="#contact" class="btn-ghost js-scroll">お問い合わせ</a>
+                    </div>
+                </div>
+
+                <div class="hero-right">
+                    <aside class="profile-card" aria-label="プロフィールカード">
+                        <div>
+                            <div class="profile-avatar" aria-hidden="true">
+                                <span>A</span>
+                            </div>
+                            <div class="profile-name">あなたの名前</div>
+                            <div class="profile-role">Web Developer / Designer</div>
+                            <div class="profile-tags">
+                                <span>HTML / CSS / JS</span>
+                                <span>React</span>
+                                <span>UI Design</span>
+                            </div>
+                        </div>
+                        <div class="floating-badge">
+                            <span>Available for work</span>
+                        </div>
+                        <div class="profile-footer">
+                            <div>
+                                <span class="online-dot"></span>
+                                <span>Open to new projects</span>
+                            </div>
+                            <div>2026</div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- About & Skills -->
+        <section id="about">
+            <h2>About / Skills</h2>
+            <div class="section-grid">
+                <div>
+                    <article class="card">
+                        <h3>自己紹介</h3>
+                        <p class="card-sub">
+                            簡単な経歴や、何に興味があってどんなことをしているのかを書きます。
+                        </p>
+                        <p>
+                            例）フロントエンドを中心に、Webアプリケーション開発やUI設計を行っています。
+                            個人開発やチーム開発の経験があり、設計〜実装〜運用まで一通りのフローを経験しています。
+                        </p>
+                    </article>
+
+                    <article class="card">
+                        <h3>経験・経歴</h3>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-title">株式会社〇〇 / フロントエンドエンジニア</div>
+                                <div class="timeline-meta">2023 - 現在</div>
+                                <div class="timeline-meta">React / TypeScript / Next.js / UI設計</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">フリーランス / Web制作</div>
+                                <div class="timeline-meta">2021 - 2023</div>
+                                <div class="timeline-meta">LP制作 / WordPress カスタマイズ など</div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div id="skills">
+                    <article class="card">
+                        <h3>スキルセット</h3>
+                        <p class="card-sub">主に扱っている技術</p>
+                        <div class="skills-group">
+                            <span class="skill-tag">HTML5 / CSS3 / Sass</span>
+                            <span class="skill-tag">JavaScript / TypeScript</span>
+                            <span class="skill-tag">React / Next.js</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">UI/UX Design</span>
+                            <span class="skill-tag">Figma</span>
+                            <span class="skill-tag">Git / GitHub</span>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <h3>興味・強み</h3>
+                        <ul class="card-sub">
+                            <li>ユーザー体験を意識したUI設計</li>
+                            <li>デザインと実装の両方からのアプローチ</li>
+                            <li>小さな改善を積み重ねるフロントエンド最適化</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <!-- data-* 属性にモーダル用の情報を持たせる -->
+                <article class="project-card js-project" data-title="ポートフォリオサイト" data-year="2026"
+                    data-tech="HTML, CSS, JavaScript"
+                    data-desc="自身の情報をまとめたポートフォリオサイトです。シンプルな構成と見やすさを重視し、モバイル端末でも快適に閲覧できるよう設計しました。" data-detail="・レスポンシブデザインの設計／実装
+・ダークテーマをベースにした配色とタイポグラフィ
+・jQuery を用いたスムーススクロールやセクションのアニメーション表示
+・今ご覧いただいているページそのものです。">
+                    <div class="project-label">Featured</div>
+                    <div class="project-title">ポートフォリオサイト</div>
+                    <p class="project-desc">
+                        本ページのようなシンプルかつ見やすい個人ポートフォリオサイト。
+                        レスポンシブ対応 / ダークテーマデザイン / 純粋なHTML+CSS+JS構成。
+                    </p>
+                    <div class="project-meta">
+                        <span>HTML</span> · <span>CSS</span> · <span>レスポンシブ</span>
+                    </div>
+                    <div class="project-footer">
+                        <div class="project-links">
+                            <a href="#" target="_blank" rel="noreferrer">View Demo</a>
+                            <a href="#" target="_blank" rel="noreferrer">GitHub</a>
+                        </div>
+                        <span>2026</span>
+                    </div>
+                    <div class="project-actions">
+                        <button type="button" class="btn-outline js-open-modal">詳細を見る</button>
+                    </div>
+                </article>
+
+                <article class="project-card js-project" data-title="タスク管理アプリ" data-year="2025"
+                    data-tech="JavaScript, LocalStorage, UI Design"
+                    data-desc="ブラウザだけで完結する、シンプルなタスク管理アプリです。ログイン不要で、日々の作業メモやTODO管理に利用できます。" data-detail="・タスクの追加／削除／完了管理
+・LocalStorage を使ったデータ保存
+・フィルタリング（すべて／未完了／完了）機能
+・軽量な構成のため、どの端末でも素早く起動します。">
+                    <div class="project-label">Web App</div>
+                    <div class="project-title">タスク管理アプリ</div>
+                    <p class="project-desc">
+                        日々のタスク管理用の小さなWebアプリ。
+                        ローカルストレージを活用して、ブラウザだけで動作します。
+                    </p>
+                    <div class="project-meta">
+                        <span>JavaScript</span> · <span>UI設計</span>
+                    </div>
+                    <div class="project-footer">
+                        <div class="project-links">
+                            <a href="#" target="_blank" rel="noreferrer">View Demo</a>
+                            <a href="#" target="_blank" rel="noreferrer">GitHub</a>
+                        </div>
+                        <span>2025</span>
+                    </div>
+                    <div class="project-actions">
+                        <button type="button" class="btn-outline js-open-modal">詳細を見る</button>
+                    </div>
+                </article>
+
+                <article class="project-card js-project" data-title="ランディングページデザイン" data-year="2024"
+                    data-tech="Figma, HTML, CSS"
+                    data-desc="新サービス紹介用のランディングページ。コンバージョンを意識した構成で、ファーストビューから申し込みまでをスムーズに誘導します。" data-detail="・Figma を使ったデザインモック作成
+・レスポンシブ対応のHTML/CSSコーディング
+・CTA ボタンの配置や見せ方の検証
+・A/Bテストを前提にしたセクション構成を採用しました。">
+                    <div class="project-label">Design</div>
+                    <div class="project-title">ランディングページデザイン</div>
+                    <p class="project-desc">
+                        新サービス紹介用LPのデザインと実装。
+                        コンバージョンを意識した構成と、モバイルでの見やすさを重視しています。
+                    </p>
+                    <div class="project-meta">
+                        <span>Figma</span> · <span>HTML/CSS</span>
+                    </div>
+                    <div class="project-footer">
+                        <div class="project-links">
+                            <a href="#" target="_blank" rel="noreferrer">View Demo</a>
+                        </div>
+                        <span>2024</span>
+                    </div>
+                    <div class="project-actions">
+                        <button type="button" class="btn-outline js-open-modal">詳細を見る</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact">
+            <h2>Contact</h2>
+            <article class="card">
+                <h3>お問い合わせ</h3>
+                <p class="card-sub">
+                    お仕事のご相談やご質問など、お気軽にご連絡ください。
+                </p>
+                <ul class="contact-list">
+                    <li><strong>Email:</strong> your.name@example.com</li>
+                    <li><strong>GitHub:</strong> <a href="https://github.com/udonac3x5s" target="_blank"
+                            rel="noreferrer">@udonac3x5s</a></li>
+                    <li><strong>X(Twitter):</strong> <a href="#" target="_blank" rel="noreferrer">@your_account</a></li>
+                    <li><strong>その他:</strong> ご希望のSNSやポートフォリオサービスのリンク</li>
+                </ul>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2026 あなたの名前. All rights reserved.
+    </footer>
+
+    <!-- モーダル本体（1つだけ置いて内容を差し替え） -->
+    <div class="modal-backdrop" id="projectModalBackdrop" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="projectModalTitle">
+            <div class="modal-header">
+                <div>
+                    <div class="project-label" id="projectModalYear">2026</div>
+                    <div class="modal-title" id="projectModalTitle">プロジェクトタイトル</div>
+                </div>
+                <button class="modal-close" type="button" aria-label="閉じる">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-meta" id="projectModalTech">Tech: HTML, CSS, JS</div>
+                <p id="projectModalDesc">
+                    ここに概要が入ります。
+                </p>
+                <h4>詳細</h4>
+                <pre id="projectModalDetail" style="white-space:pre-wrap; font-family:inherit; margin:0;">
+ここに詳細テキストが入ります。
+        </pre>
+                <div class="modal-tags" id="projectModalTags">
+                    <!-- あればここにタグを出す（今回は data-tech をそのまま1つとして扱う） -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-ghost js-modal-close-footer">閉じる</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery を使った動き -->
+    <script>
+        $(function () {
+            // ===== 1. ナビゲーションのスムーススクロール =====
+            $('.nav-links a, .js-scroll').on('click', function (e) {
+                var href = $(this).attr('href');
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    var $target = $(href);
+                    if ($target.length) {
+                        var headerHeight = $('header').outerHeight() || 0;
+                        var position = $target.offset().top - headerHeight;
+                        $('html, body').animate({ scrollTop: position }, 500, 'swing');
+                    }
+                }
+            });
+
+            // ===== 2. スクロール時にヘッダーとセクションをアニメーション =====
+            var $header = $('header');
+            var $sections = $('section');
+
+            function onScroll() {
+                var scrollTop = $(window).scrollTop();
+                var windowHeight = $(window).height();
+
+                if (scrollTop > 20) {
+                    $header.addClass('scrolled');
+                } else {
+                    $header.removeClass('scrolled');
+                }
+
+                $sections.each(function () {
+                    var sectionTop = $(this).offset().top;
+                    if (scrollTop + windowHeight * 0.8 > sectionTop) {
+                        $(this).addClass('visible');
+                    }
+                });
+
+                // 現在位置に応じてナビのアクティブ変更
+                var currentId = null;
+                $sections.each(function () {
+                    var top = $(this).offset().top - 100;
+                    if (scrollTop >= top) {
+                        currentId = this.id;
+                    }
+                });
+                if (currentId) {
+                    $('.nav-links a').removeClass('active');
+                    $('.nav-links a[href="#' + currentId + '"]').addClass('active');
+                }
+            }
+
+            $(window).on('scroll', onScroll);
+            onScroll();
+
+            // ===== 3. プロジェクトのモーダル =====
+            var $backdrop = $('#projectModalBackdrop');
+            var $modalTitle = $('#projectModalTitle');
+            var $modalYear = $('#projectModalYear');
+            var $modalTech = $('#projectModalTech');
+            var $modalDesc = $('#projectModalDesc');
+            var $modalDetail = $('#projectModalDetail');
+            var $modalTags = $('#projectModalTags');
+
+            function openModalFromCard($card) {
+                var title = $card.data('title') || '';
+                var year = $card.data('year') || '';
+                var tech = $card.data('tech') || '';
+                var desc = $card.data('desc') || '';
+                var detail = $card.data('detail') || '';
+
+                $modalTitle.text(title);
+                $modalYear.text(year);
+                $modalTech.text('Tech: ' + tech);
+                $modalDesc.text(desc);
+                $modalDetail.text(detail);
+
+                // tags（今回は tech をそのままタグ1つとして簡易表示）
+                $modalTags.empty();
+                if (tech) {
+                    tech.split(',').forEach(function (t) {
+                        var trimmed = t.trim();
+                        if (!trimmed) return;
+                        $('<span class="modal-tag"></span>').text(trimmed).appendTo($modalTags);
+                    });
+                }
+
+                $backdrop.addClass('is-open').attr('aria-hidden', 'false');
+            }
+
+            // カード本体クリック or 「詳細を見る」ボタンクリックでモーダル
+            $('.js-project').on('click', function (e) {
+                // aタグをクリックしたときはそのリンク優先
+                if ($(e.target).is('a')) {
+                    return;
+                }
+                openModalFromCard($(this));
+            });
+
+            $('.js-open-modal').on('click', function (e) {
+                e.stopPropagation(); // カードのクリックイベントは止める
+                var $card = $(this).closest('.js-project');
+                openModalFromCard($card);
+            });
+
+            function closeModal() {
+                $backdrop.removeClass('is-open').attr('aria-hidden', 'true');
+            }
+
+            // 閉じるボタン
+            $('.modal-close, .js-modal-close-footer').on('click', function () {
+                closeModal();
+            });
+
+            // 背景クリックで閉じる（モーダル外をクリックしたとき）
+            $backdrop.on('click', function (e) {
+                if ($(e.target).is($backdrop)) {
+                    closeModal();
+                }
+            });
+
+            // ESCキーで閉じる
+            $(document).on('keydown', function (e) {
+                if (e.key === 'Escape' && $backdrop.hasClass('is-open')) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
