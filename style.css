@@ -233,13 +233,14 @@ h2 {
 
 /* ===== プロフィール写真（ヒーロー右側） ===== */
 .profile-photo {
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     border-radius: 24px;
     overflow: hidden;
     border: 2px solid rgba(148, 163, 184, 0.6);
     box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
     margin-left: auto; /* 右寄せ */
+    margin-top: 24px;
 }
 
 .profile-photo img {
@@ -619,8 +620,8 @@ footer {
     }
 
     .profile-photo {
-        width: 200px;
-        height: 200px;
+        width: 250px;
+        height: 250px;
         margin: 0 auto 16px;
     }
 }
