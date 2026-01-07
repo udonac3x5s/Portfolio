@@ -246,6 +246,30 @@ h2 {
     justify-content: space-between;
 }
 
+/* ここから追加 */
+.project-thumb {
+    width: 100%;
+    aspect-ratio: 16 / 9;          /* 比率を統一（対応してないブラウザでも大きな問題は出ない） */
+    border-radius: 8px;
+    overflow: hidden;
+    background: #020617;
+    margin-bottom: 6px;
+    border: 1px solid rgba(31, 41, 55, 0.9);
+}
+
+.project-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+/* ホバーしたとき少しズーム */
+.project-card:hover .project-thumb img {
+    transform: scale(1.03);
+}
+
 .profile-avatar {
     width: 72px;
     height: 72px;
@@ -613,6 +637,11 @@ footer {
 
 
 
+
+
+
+/* ===== スキルマトリクス ===== */
+
 .skills-matrix {
     margin-top: 10px;
     border-radius: 10px;
@@ -663,4 +692,28 @@ footer {
     .skills-matrix-col:last-child {
         border-bottom: none;
     }
+}
+
+
+
+
+/* ===== プロフィール画像 ===== */
+.profile-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 22px;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    background: linear-gradient(135deg, #1f2937, #020617);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    overflow: hidden; /* 画像を角丸で切り取る */
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 顔が潰れないようにトリミング */
+    display: block;
 }
