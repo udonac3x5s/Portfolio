@@ -65,7 +65,7 @@
         <section id="about">
             <h2>About / Skills</h2>
             <div class="section-grid">
-                <div>
+                <div id="about">
                     <article class="card">
                         <h3>自己紹介</h3>
                         <p class="card-sub">
@@ -95,17 +95,18 @@
 
                     <article class="card">
                         <h3>趣味</h3>
-                        <div class="card-sub">
+                        <ul class="card-sub">
                             ゲーム機本体の収集。
                             <li>Nintendo 据置 : カラーテレビゲーム15、ファミコン～Switch2<br>
-                                        携帯 : ゲームボーイ～new2DSLL(GBpocket、GBMicro、DSiLL、new3DS、2DS、SwitchLite除く)
+                                &emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp; 携帯 :
+                                ゲームボーイ～new2DSLL(GBpocket、GBMicro、DSiLL、new3DS、2DS、SwitchLite除く)
                             </li>
-                            <li>SIE(SCE) 据置 : PS1～PS3、PSS<br>
-                                        携帯 : PSP、PSVITA (PSPgoは所持していない)
+                            <li>SIE(SCE) 据置 : PS1～PS3、PS5<br>
+                                &emsp;&emsp;&emsp;&nbsp;&nbsp; 携帯 : PSP、PSVITA (PSPgoは所持していない)
                             </li>
                             <li>Microsoft 据置 : XBOX360、XBOXSeriesX</li>
 
-                        </div>
+                        </ul>
                         <h3>好きなゲーム</h3>
                         <ul class="card-sub">
                             <li>艦隊これくしょん -艦これ-</li>
@@ -116,78 +117,81 @@
                     </article>
                 </div>
 
-                <!-- Skills & Qualifications -->
-                <div id="skills">
-                    <article class="card">
-                        <h3>スキルセット</h3>
-                        <p class="card-sub">主に扱っている言語・ツール・エンジン</p>
+                <section id="skills">
+                    <!-- Skills & Qualifications -->
+                    <div id="skills">
+                        <article class="card">
+                            <h3>スキルセット</h3>
+                            <p class="card-sub">主に扱っている言語・ツール・エンジン</p>
 
-                        <!-- 言語 / 使用ツール / 使用エンジン をテーブル風に表示 -->
-                        <div class="skills-matrix">
-                            <div class="skills-matrix-row skills-matrix-header">
-                                <div class="skills-matrix-col">言語</div>
-                                <div class="skills-matrix-col">ツール</div>
-                                <div class="skills-matrix-col">開発環境</div>
+                            <!-- 言語 / 使用ツール / 使用エンジン をテーブル風に表示 -->
+                            <div class="skills-matrix">
+                                <div class="skills-matrix-row skills-matrix-header">
+                                    <div class="skills-matrix-col">言語</div>
+                                    <div class="skills-matrix-col">ツール</div>
+                                    <div class="skills-matrix-col">開発環境</div>
+                                </div>
+                                <div class="skills-matrix-row">
+                                    <div class="skills-matrix-col">
+                                        <span class="skill-tag">C</span>
+                                        <span class="skill-tag">C++</span>
+                                        <span class="skill-tag">C#</span>
+                                        <span class="skill-tag">JavaScript</span>
+                                        <span class="skill-tag">Python</span>
+                                        <span class="skill-tag">HTML/CSS</span>
+                                        <span class="skill-tag">SQL</span>
+                                    </div>
+                                    <div class="skills-matrix-col">
+                                        <span class="skill-tag">Visual Studio</span>
+                                        <span class="skill-tag">VS Code</span>
+                                        <span class="skill-tag">Git / GitHub</span>
+                                        <!-- <span class="skill-tag"></span> -->
+                                    </div>
+                                    <div class="skills-matrix-col">
+                                        <span class="skill-tag">DxLib</span>
+                                        <span class="skill-tag">Unity</span>
+                                        <span class="skill-tag">Unreal Engine</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="skills-matrix-row">
-                                <div class="skills-matrix-col">
-                                    <span class="skill-tag">C</span>
-                                    <span class="skill-tag">C++</span>
-                                    <span class="skill-tag">C#</span>
-                                    <span class="skill-tag">JavaScript</span>
-                                    <span class="skill-tag">Python</span>
-                                    <span class="skill-tag">HTML/CSS</span>
-                                    <span class="skill-tag">SQL</span>
-                                </div>
-                                <div class="skills-matrix-col">
-                                    <span class="skill-tag">Visual Studio</span>
-                                    <span class="skill-tag">VS Code</span>
-                                    <span class="skill-tag">Git / GitHub</span>
-                                    <!-- <span class="skill-tag"></span> -->
-                                </div>
-                                <div class="skills-matrix-col">
-                                    <span class="skill-tag">DxLib</span>
-                                    <span class="skill-tag">Unity</span>
-                                    <span class="skill-tag">Unreal Engine</span>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
+                        </article>
 
-                    <!-- 所持している資格欄 -->
-                    <article class="card">
-                        <h3>資格</h3>
-                        <!-- <ul class="card-sub">
+                        <!-- 所持している資格欄 -->
+                        <article class="card">
+                            <h3>資格</h3>
+                            <!-- <ul class="card-sub">
                             <li>日商簿記検定3級</li>
                             <li>ITパスポート</li>
                             <li></li>
                         </ul> -->
-                        <div class="timeline">
-                            <div class="timeline-item">
-                                <div class="timeline-title">日商簿記検定3級</div>
-                                <div class="timeline-meta">取得年: 2022年 2月</div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="timeline-title">ITパスポート</div>
-                                <div class="timeline-meta">取得年: 2023年 8月</div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="timeline-title">普通自動車第一種免許(AT限定)</div>
-                                <div class="timeline-meta">取得年: 2023年 12月</div>
-                            </div>
-                            <div class="timeline-item">
-                                <div class="timeline-title">CGクリエイター検定 ベーシック</div>
-                                <div class="timeline-meta">取得年: 2024年 12月</div>
-                            </div>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-title">日商簿記検定3級</div>
+                                    <div class="timeline-meta">取得年: 2022年 2月</div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-title">ITパスポート</div>
+                                    <div class="timeline-meta">取得年: 2023年 8月</div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-title">普通自動車第一種免許(AT限定)</div>
+                                    <div class="timeline-meta">取得年: 2023年 12月</div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-title">CGクリエイター検定 ベーシック</div>
+                                    <div class="timeline-meta">取得年: 2024年 12月</div>
+                                </div>
 
 
-                            <div class="timeline-item">
-                                <div class="timeline-title">基本情報技術者試験</div>
-                                <div class="timeline-meta">取得年: 2025年 11月</div>
+                                <div class="timeline-item">
+                                    <div class="timeline-title">基本情報技術者試験</div>
+                                    <div class="timeline-meta">取得年: 2025年 11月</div>
+                                </div>
                             </div>
-                        </div>
-                    </article>
-                </div>
+                        </article>
+                    </div>
+                </section>
+            </div>
             </div>
         </section>
 
@@ -201,8 +205,7 @@
                     data-detail="・ 動的に生成されるノーツとタイミング判定システム
 ・ 多様な楽曲と難易度設定
 ・ 曲の数に応じて選曲ボタンを自動で生成
-・ "
-                    data-video="https://www.youtube.com/watch?v=PMoqV9_knzc&rel=0">
+・ " data-video="https://www.youtube.com/watch?v=PMoqV9_knzc&rel=0">
 
                     <!-- ここを追加：プロジェクト画像 -->
                     <div class="project-thumb">
@@ -238,8 +241,7 @@
                     data-desc="ブラウザだけで完結する、シンプルなタスク管理アプリです。ログイン不要で、日々の作業メモやTODO管理に利用できます。" data-detail="・タスクの追加／削除／完了管理
 ・LocalStorage を使ったデータ保存
 ・フィルタリング（すべて／未完了／完了）機能
-・軽量な構成のため、どの端末でも素早く起動します。"
-                    data-video="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+・軽量な構成のため、どの端末でも素早く起動します。" data-video="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
 
                     <!-- ここを追加：プロジェクト画像 -->
                     <div class="project-thumb">
@@ -257,7 +259,8 @@
                         <div class="skill-tag">C#</div>
                         <div class="skill-tag">VSCode</div>
                         <div class="skill-tag">Git / GitHub</div>
-                    </div>                    <div class="project-footer">
+                    </div>
+                    <div class="project-footer">
                         <div class="project-links">
                             <a href="#" target="_blank" rel="noreferrer">View Demo</a>
                             <a href="#" target="_blank" rel="noreferrer">GitHub</a>
@@ -274,8 +277,7 @@
                     data-desc="新サービス紹介用のランディングページ。コンバージョンを意識した構成で、ファーストビューから申し込みまでをスムーズに誘導します。" data-detail="・Figma を使ったデザインモック作成
 ・レスポンシブ対応のHTML/CSSコーディング
 ・CTA ボタンの配置や見せ方の検証
-・A/Bテストを前提にしたセクション構成を採用しました。"
-                    data-video="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+・A/Bテストを前提にしたセクション構成を採用しました。" data-video="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
 
                     <!-- ここを追加：プロジェクト画像 -->
                     <div class="project-thumb">
@@ -413,6 +415,10 @@
                     var top = $(this).offset().top - 100;
                     if (scrollTop >= top) {
                         currentId = this.id;
+                    }
+                    // 一番下についたら最後のセクションをアクティブに
+                    if ($(window).scrollTop() + $(window).height() === $(document).height()) {
+                        currentId = $sections.last().attr('id');
                     }
                 });
                 if (currentId) {
