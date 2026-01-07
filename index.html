@@ -76,11 +76,14 @@
                         </div>
                     </aside>
                 </div> -->
-            <div class="profile-avatar" aria-hidden="true">
-                <!-- ここを差し替え -->
-                <!-- <span>A</span> -->
-                <img src="me.jpg" alt="石井和磨のプロフィール写真">
-            </div>
+
+                <!-- ここから右側カラム：写真だけ -->
+                <div class="hero-right">
+                    <div class="profile-photo">
+                        <img src="img/me.jpg" alt="石井和磨のプロフィール写真">
+                    </div>
+                </div>
+                <!-- ここまで右側カラム -->
             </div>
         </section>
 
@@ -171,33 +174,37 @@
             <h2>Projects</h2>
             <div class="projects-grid">
                 <!-- data-* 属性にモーダル用の情報を持たせる -->
-                <article class="project-card js-project" data-title="ポートフォリオサイト" data-year="2026"
+                <article class="project-card js-project" data-title="Tap Music" data-year="2025"
                     data-tech="HTML, CSS, JavaScript"
-                    data-desc="自身の情報をまとめたポートフォリオサイトです。シンプルな構成と見やすさを重視し、モバイル端末でも快適に閲覧できるよう設計しました。" data-detail="・レスポンシブデザインの設計／実装
-・ダークテーマをベースにした配色とタイポグラフィ
-・jQuery を用いたスムーススクロールやセクションのアニメーション表示
-・今ご覧いただいているページそのものです。">
+                    data-desc="個人で制作した音楽ゲーム。シンプルな操作性と多彩な楽曲が特徴です。"
+                    data-detail="・ 動的に生成されるノーツとタイミング判定システム
+・ 多様な楽曲と難易度設定
+・ 曲の数に応じて選曲ボタンを自動で生成
+・ ">
 
                     <!-- ここを追加：プロジェクト画像 -->
                     <div class="project-thumb">
-                        <img src="img/Kancolle_Hibiki.jpg" alt="ポートフォリオサイトのサムネイル">
+                        <img src="img/Kancolle_Hibiki.jpg" alt="Tap Musicのサムネイル">
                     </div>
 
-                    <div class="project-label">Featured</div>
-                    <div class="projectv-title">ポートフォリオサイト</div>
+                    <div class="project-label">個人制作</div>
+                    <div class="project-title">Tap Music</div>
                     <p class="project-desc">
-                        本ページのようなシンプルかつ見やすい個人ポートフォリオサイト。
-                        レスポンシブ対応 / ダークテーマデザイン / 純粋なHTML+CSS+JS構成。
+                        個人で制作した音楽ゲーム。<br>
+                        シンプルな操作性と多彩な楽曲が特徴です。
                     </p>
                     <div class="project-meta">
-                        <span>HTML</span> · <span>CSS</span> · <span>レスポンシブ</span>
+                        <div class="skill-tag">Unity</div>
+                        <div class="skill-tag">C#</div>
+                        <div class="skill-tag">VSCode</div>
+                        <div class="skill-tag">Git / GitHub</div>
                     </div>
                     <div class="project-footer">
                         <div class="project-links">
-                            <a href="#" target="_blank" rel="noreferrer">View Demo</a>
+                            <!-- <a href="#" target="_blank" rel="noreferrer">View Demo</a> -->
                             <a href="#" target="_blank" rel="noreferrer">GitHub</a>
                         </div>
-                        <span>2026</span>
+                        <span>2025</span>
                     </div>
                     <div class="project-actions">
                         <button type="button" class="btn-outline js-open-modal">詳細を見る</button>
