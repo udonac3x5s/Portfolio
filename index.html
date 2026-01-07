@@ -175,12 +175,11 @@
             <div class="projects-grid">
                 <!-- data-* 属性にモーダル用の情報を持たせる -->
                 <article class="project-card js-project" data-title="Tap Music" data-year="2025"
-                    data-tech="HTML, CSS, JavaScript"
-                    data-desc="個人で制作した音楽ゲーム。シンプルな操作性と多彩な楽曲が特徴です。"
+                    data-tech="Unity, C#, VSCode, Git / GitHub" data-desc="個人で制作した音楽ゲーム。シンプルな操作性と多彩な楽曲が特徴です。"
                     data-detail="・ 動的に生成されるノーツとタイミング判定システム
 ・ 多様な楽曲と難易度設定
 ・ 曲の数に応じて選曲ボタンを自動で生成
-・ ">
+・ " data-video="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
 
                     <!-- ここを追加：プロジェクト画像 -->
                     <div class="project-thumb">
@@ -312,14 +311,24 @@
                 <button class="modal-close" type="button" aria-label="閉じる">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="modal-meta" id="projectModalTech">Tech: HTML, CSS, JS</div>
                 <p id="projectModalDesc">
                     ここに概要が入ります。
                 </p>
                 <h4>詳細</h4>
                 <pre id="projectModalDetail" style="white-space:pre-wrap; font-family:inherit; margin:0;">
-ここに詳細テキストが入ります。
-        </pre>
+    ここに詳細テキストが入ります。
+            </pre>
+
+                <!-- ここから追加：動画埋め込みエリア -->
+                <div class="modal-video-wrapper" id="projectModalVideoWrapper" style="margin-top:12px; display:none;">
+                    <div class="modal-video">
+                        <iframe id="projectModalVideo" src="" title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+                <!-- ここまで追加 -->
+
                 <div class="modal-tags" id="projectModalTags">
                     <!-- あればここにタグを出す（今回は data-tech をそのまま1つとして扱う） -->
                 </div>
@@ -389,10 +398,13 @@
             var $backdrop = $('#projectModalBackdrop');
             var $modalTitle = $('#projectModalTitle');
             var $modalYear = $('#projectModalYear');
-            var $modalTech = $('#projectModalTech');
             var $modalDesc = $('#projectModalDesc');
             var $modalDetail = $('#projectModalDetail');
             var $modalTags = $('#projectModalTags');
+
+            // 動画用
+            var $modalVideoWrapper = $('#projectModalVideoWrapper');
+            var $modalVideo = $('#projectModalVideo');
 
             function openModalFromCard($card) {
                 var title = $card.data('title') || '';
@@ -400,14 +412,32 @@
                 var tech = $card.data('tech') || '';
                 var desc = $card.data('desc') || '';
                 var detail = $card.data('detail') || '';
+                var video = $card.data('video') || '';   // ★ ここで data-video を読む
 
                 $modalTitle.text(title);
                 $modalYear.text(year);
-                $modalTech.text('Tech: ' + tech);
                 $modalDesc.text(desc);
                 $modalDetail.text(detail);
 
-                // tags（今回は tech をそのままタグ1つとして簡易表示）
+                // 動画の埋め込み
+                if (video) {
+                    // 普通のURL（https://www.youtube.com/watch?v=XXXX）を埋め込み用に変換
+                    var embedUrl = convertYouTubeUrlToEmbed(video);
+                    if (embedUrl) {
+                        $modalVideo.attr('src', embedUrl);
+                        $modalVideoWrapper.show();
+                    } else {
+                        // 変換できなければ動画エリアを非表示に
+                        $modalVideo.attr('src', '');
+                        $modalVideoWrapper.hide();
+                    }
+                } else {
+                    // data-video がなければ動画エリアを非表示
+                    $modalVideo.attr('src', '');
+                    $modalVideoWrapper.hide();
+                }
+
+                // tags（tech をそのままタグ表示）
                 $modalTags.empty();
                 if (tech) {
                     tech.split(',').forEach(function (t) {
@@ -435,8 +465,11 @@
                 openModalFromCard($card);
             });
 
+            // モーダルを閉じるとき
             function closeModal() {
                 $backdrop.removeClass('is-open').attr('aria-hidden', 'true');
+                // 動画を止める
+                $modalVideo.attr('src', '');
             }
 
             // 閉じるボタン
@@ -457,6 +490,30 @@
                     closeModal();
                 }
             });
+
+            // YouTube URL を埋め込み用URLに変換する関数
+            function convertYouTubeUrlToEmbed(url) {
+                if (!url) return '';
+
+                // 通常の形式 https://www.youtube.com/watch?v=XXXX
+                var watchMatch = url.match(/watch\?v=([^&]+)/);
+                if (watchMatch && watchMatch[1]) {
+                    return 'https://www.youtube.com/embed/' + watchMatch[1];
+                }
+
+                // 短縮URL https://youtu.be/XXXX
+                var shortMatch = url.match(/youtu\.be\/([^?]+)/);
+                if (shortMatch && shortMatch[1]) {
+                    return 'https://www.youtube.com/embed/' + shortMatch[1];
+                }
+
+                // すでに embed 形式ならそのまま
+                if (url.includes('youtube.com/embed/')) {
+                    return url;
+                }
+
+                return '';
+            }
         });
     </script>
 </body>
