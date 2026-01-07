@@ -649,11 +649,6 @@ footer {
         grid-template-columns: minmax(0, 1fr);
     }
 
-    header {
-        position: sticky;
-        top : 0;
-    }
-
     .nav-inner {
         padding: 8px 16px;      /* 高さを少し低くする */
     }
@@ -707,32 +702,6 @@ footer {
 .skills-matrix-col:last-child {
     border-right: none;
 }
-
-@media (max-width: 768px) {
-    .skills-matrix-row {
-        grid-template-columns: 1fr;
-    }
-
-    .skills-matrix-col {
-        border-right: none;
-        border-bottom: 1px solid rgba(31, 41, 55, 0.9);
-    }
-
-    .skills-matrix-col:last-child {
-        border-bottom: none;
-    }
-
-    header {
-        position: static;
-    }
-
-    .nav-inner {
-        padding-inline: 16px;
-    }
-}
-
-
-
 
 /* ===== プロフィール画像 ===== */
 .profile-avatar {
