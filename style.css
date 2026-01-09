@@ -37,7 +37,7 @@ header {
     border-bottom: 1px solid var(--border);
     backdrop-filter: blur(12px);
     background: linear-gradient(to bottom, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.8));
-    position: fixed;  /* sticky ではなく fixed で確実に追従 */
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -99,7 +99,7 @@ header.scrolled {
 main {
     max-width: 960px;
     margin: 0 auto;
-    padding: 72px 20px 64px; /* ← 上を増やしてヘッダーと被らないように */
+    padding: 72px 20px 64px;
 }
 
 section {
@@ -150,21 +150,6 @@ h2 {
     display: flex;
     flex-direction: column;
     gap: 16px;
-}
-
-.hero-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    font-size: 0.85rem;
-    color: var(--muted);
-}
-
-.pill {
-    padding: 4px 10px;
-    border-radius: 999px;
-    background: rgba(15, 23, 42, 0.9);
-    border: 1px solid var(--border);
 }
 
 .hero-actions {
@@ -239,7 +224,7 @@ h2 {
     overflow: hidden;
     border: 2px solid rgba(148, 163, 184, 0.6);
     box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9);
-    margin-left: auto; /* 右寄せ */
+    margin-left: auto;
     margin-top: 24px;
 }
 
@@ -248,15 +233,6 @@ h2 {
     height: 100%;
     object-fit: cover;
     display: block;
-}
-
-.online-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 999px;
-    background: #22c55e;
-    box-shadow: 0 0 14px rgba(34, 197, 94, 0.9);
-    margin-right: 4px;
 }
 
 .section-grid {
@@ -321,13 +297,6 @@ h2 {
     color: var(--muted);
 }
 
-.skills-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 8px;
-}
-
 .skill-tag {
     padding: 4px 10px;
     border-radius: 999px;
@@ -358,7 +327,6 @@ h2 {
     cursor: pointer;
 }
 
-/* サムネイル */
 .project-thumb {
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -433,8 +401,6 @@ h2 {
     display: flex;
     justify-content: flex-end;
 }
-
-
 
 /* ===== Contact, Footer ===== */
 .contact-list {
@@ -525,12 +491,6 @@ footer {
     color: var(--text);
 }
 
-.modal-meta {
-    font-size: 0.8rem;
-    color: var(--muted);
-    margin-bottom: 8px;
-}
-
 .modal-tags {
     display: flex;
     flex-wrap: wrap;
@@ -554,10 +514,6 @@ footer {
     justify-content: flex-end;
     gap: 8px;
     font-size: 0.85rem;
-}
-
-.modal-footer a {
-    text-decoration: none;
 }
 
 /* ===== スキルマトリクス ===== */
@@ -647,3 +603,83 @@ footer {
     border: none;
 }
 
+/* ===== モーダル内の画像スライダー ===== */
+.modal-slider-wrapper {
+    margin-bottom: 12px;
+}
+
+.modal-slider {
+    position: relative;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(31, 41, 55, 0.9);
+    background: #020617;
+}
+
+.modal-slider-viewport {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+
+.modal-slider-viewport img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* 左右矢印 */
+.modal-slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    border: none;
+    background: rgba(15, 23, 42, 0.8);
+    color: #e5e7eb;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.modal-slider-arrow-left {
+    left: 8px;
+}
+
+.modal-slider-arrow-right {
+    right: 8px;
+}
+
+.modal-slider-arrow:hover {
+    background: rgba(37, 99, 235, 0.9);
+    transform: translateY(-50%) scale(1.05);
+}
+
+/* インジケータ（●●●） */
+.modal-slider-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+.modal-slider-indicator-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(75, 85, 99, 0.8);
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.modal-slider-indicator-dot.is-active {
+    background: rgba(59, 130, 246, 0.95);
+    transform: scale(1.2);
+}
